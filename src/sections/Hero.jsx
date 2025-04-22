@@ -23,7 +23,7 @@ const Hero = () => {
 
       <div className="hero-layout">
         {/* LEFT: Hero Content */}
-        <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
+        <header className="flex flex-col justify-center md:w-full w-screen md:px-10 px-2">
           <div className="flex flex-col gap-7">
             <div className="hero-text">
               <h1>
@@ -64,11 +64,15 @@ const Hero = () => {
         </header>
 
         {/* RIGHT: 3D Model or Visual */}
-        <figure>
-          <div className="hero-3d-layout">
-            <HeroExperience />
-          </div>
-        </figure>
+        <figure className="hidden md:block">
+  <div className="flex justify-center items-center">
+    <img
+      src="/images/proifle.jpeg"
+      alt="Profile"
+      className="rounded-full"
+    />
+  </div>
+</figure>
       </div>
 
       <AnimatedCounter />
