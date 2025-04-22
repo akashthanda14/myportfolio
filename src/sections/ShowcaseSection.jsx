@@ -62,7 +62,7 @@ const AppShowcase = () => {
                   <img src="/images/project2.png" alt="Hospital Facilities Listing" />
                 </a>
               </div>
-              <h2>Hospital Facilities Listing</h2>
+              <h2>Strength Gym fitness Centre</h2>
             </div>
 
             <div className="project" ref={(el) => (cardRefs.current[2] = el)}>
