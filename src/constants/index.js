@@ -11,10 +11,8 @@ const navLinks = [
     name: "Skills",
     link: "#skills",
   },
-  {
-    name: "Testimonials",
-    link: "#testimonials",
-  },
+  { name: "Resume", link: "public/CV.pdf" }
+
 ];
 
 const words = [
