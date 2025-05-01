@@ -11,7 +11,7 @@ const navLinks = [
     name: "Skills",
     link: "#skills",
   },
-  { name: "Resume", link: "public/CV.pdf" }
+  { name: "Resume", link: "/CV.pdf" }
 
 ];
 
@@ -27,9 +27,9 @@ const words = [
 ];
 
 const counterItems = [
-  { value: 15, suffix: "+", label: "Years of Experience" },
-  { value: 200, suffix: "+", label: "Satisfied Clients" },
-  { value: 108, suffix: "+", label: "Completed Projects" },
+  { value: 36, suffix: "+", label: "Months of Experience" },
+  { value: 50, suffix: "+", label: "Satisfied Clients" },
+  { value: 80, suffix: "+", label: "Completed Projects" },
   { value: 90, suffix: "%", label: "Client Retention Rate" },
 ];
 

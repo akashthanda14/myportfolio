@@ -67,7 +67,7 @@ const Hero = () => {
         <figure className="hidden md:block">
   <div className="flex justify-center items-center">
     <img
-      src="/images/proifle.jpeg"
+      src="/images/profileee.png"
       alt="Profile"
       className="rounded-full"
     />

@@ -9,11 +9,13 @@ import LogoShowcase from "./sections/LogoShowcase";
 import FeatureCards from "./sections/FeatureCards";
 import Navbar from "./components/NavBar";
 import Slideshow from "./components/SlideShow";
+import Services from "./sections/Services";
 
 const App = () => (
   <>
     <Navbar />
     <Hero />
+    <Services/>
     <ShowcaseSection />
     <LogoShowcase />
     <FeatureCards />
