@@ -46,7 +46,7 @@ const AppShowcase = () => {
           <div className="first-project-wrapper" ref={(el) => (cardRefs.current[0] = el)}>
             <div className="image-wrapper">
               <a href="https://hospital-management-system-lyart-eta.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <img src="/images/hospital.png" alt="Hospital Management System Interface" />
+                <img className="max-w-full" src="/images/hospital.png" alt="Hospital Management System Interface" />
               </a>
             </div>
             <div className="text-content">
@@ -73,7 +73,7 @@ const AppShowcase = () => {
             <div className="project" ref={(el) => (cardRefs.current[1] = el)}>
               <div className="image-wrapper bg-[#FFEFDB]">
                 <a href="https://strengthgymphillaur.in" target="_blank" rel="noopener noreferrer">
-                  <img src="/images/project2.png" alt="Strength Gym" />
+                  <img className="max-w-full" src="/images/project2.png" alt="Strength Gym" />
                 </a>
               </div>
               <h2>Strength Gym Fitness Centre</h2>
@@ -94,7 +94,7 @@ const AppShowcase = () => {
             <div className="project" ref={(el) => (cardRefs.current[2] = el)}>
               <div className="image-wrapper bg-[#FFE7EB]">
                 <a href="https://sutlejindustrialcorp.com" target="_blank" rel="noopener noreferrer">
-                  <img src="/images/project3.png" alt="Hospital Specialties Showcase" />
+                  <img className="max-w-full" src="/images/project3.png" alt="Hospital Specialties Showcase" />
                 </a>
               </div>
               <h2>Sutlej Industrial Corp</h2>
@@ -120,8 +120,8 @@ const AppShowcase = () => {
           {/* Project 3 */}
           <div className="first-project-wrapper" ref={(el) => (cardRefs.current[3] = el)}>
             <div className="image-wrapper">
-              <a href="https://hackathon-nine-peach.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <img src="/images/RAG.png" alt="RAG App Interface" />
+              <a href="https://insurance-project-sepia.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <img className="max-w-full" src="/images/RAGG.png" alt="RAG App Interface" />
               </a>
             </div>
             <div className="text-content">
@@ -148,7 +148,7 @@ const AppShowcase = () => {
             <div className="project" ref={(el) => (cardRefs.current[4] = el)}>
               <div className="image-wrapper bg-[#FFEFDB]">
                 <a href="https://tridenity.com" target="_blank" rel="noopener noreferrer">
-                  <img src="/images/project1.png" alt="Startup Web Agency" />
+                  <img className="max-w-full" src="/images/project1.png" alt="Startup Web Agency" />
                 </a>
               </div>
               <h2>My Startup Website - Tridenity</h2>
@@ -169,7 +169,7 @@ const AppShowcase = () => {
             <div className="project" ref={(el) => (cardRefs.current[5] = el)}>
               <div className="image-wrapper bg-[#FFE7EB]">
                 <a href="https://sih-project-two.vercel.app/" target="_blank" rel="noopener noreferrer">
-                  <img src="/images/agribid.png" alt="Agribid Marketplace App" />
+                  <img className="max-w-full" src="/images/agribid.png" alt="Agribid Marketplace App" />
                 </a>
               </div>
               <h2>Agribid - A Marketplace for Farmers</h2>
