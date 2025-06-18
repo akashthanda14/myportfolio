@@ -15,7 +15,6 @@ const App = () => (
   <>
     <Navbar />
     <Hero />
-    <Services/>
     <ShowcaseSection />
     <LogoShowcase />
     <FeatureCards />
