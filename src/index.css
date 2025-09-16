@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
 :root {
@@ -12,7 +12,7 @@ body {
   background-color: black;
   color: white;
   scroll-behavior: smooth;
-  font-family: "Mona Sans", sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 section {
@@ -20,7 +20,8 @@ section {
 }
 
 @theme {
-  --font-sans: "Mona Sans", sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", Menlo, Monaco, monospace;
   --color-white-50: #d9ecff;
   --color-black-50: #1c1c21;
   --color-black-100: #0e0e10;
@@ -468,5 +469,56 @@ section {
 }
 
 .card:hover::before {
+  opacity: 1;
+}
+
+/* Typing Effect */
+.typing-text {
+  position: relative;
+  display: inline-block;
+}
+
+.typing-text::before {
+  content: "Hello, I'm";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  border-right: 3px solid #4A90E2;
+  white-space: nowrap;
+  animation: typing 2s steps(10, end) forwards, blink-caret 1s step-end infinite;
+  animation-delay: 0.5s;
+}
+
+.typing-text span {
+  opacity: 0;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #4A90E2;
+  }
+}
+
+/* Remove caret after typing is complete */
+.typing-text.typing-complete::before {
+  border-right: none;
+  animation: none;
+}
+
+.typing-text.typing-complete span {
   opacity: 1;
 }

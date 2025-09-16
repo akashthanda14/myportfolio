@@ -1,194 +1,183 @@
-import { useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { ExternalLink, Github } from "lucide-react";
 
-gsap.registerPlugin(ScrollTrigger);
+const projects = [
+  {
+    id: 1,
+    title: "Dolchico - Premium Fashion",
+    description: "Elegant e-commerce platform showcasing premium fashion collections with modern design and seamless shopping experience.",
+    tech: ["AWS", "Node.js", "Next.js", "PostgreSQL", "Prisma", "Express", "Tailwind CSS", "ShadCN"],
+    image: "/images/dolchico.png",
+    liveUrl: "https://dolchico.com",
+    githubUrl: "#",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "AI PDF Analyzer",
+    description: "AI-powered document processing with intelligent Q&A capabilities.",
+    tech: ["TypeScript", "OpenAI", "PostgreSQL"],
+    image: "/images/RAG.png",
+    liveUrl: "https://insurance-project-sepia.vercel.app/",
+    githubUrl: "#"
+  },
+  {
+    id: 3,
+    title: "Manish Academy",
+    description: "Educational platform providing comprehensive learning resources and course management system.",
+    tech: ["React", "JavaScript", "CSS"],
+    image: "/images/Insurance.png",
+    liveUrl: "https://academymanish.netlify.app/",
+    githubUrl: "#"
+  },
+  {
+    id: 4,
+    title: "BrownKudi - Farming Platform",
+    description: "Modern agricultural platform connecting farmers with resources and market opportunities.",
+    tech: ["React", "Next.js", "TailwindCSS"],
+    image: "/images/farming.png",
+    liveUrl: "https://brownkudi.vercel.app",
+    githubUrl: "#"
+  },
+  {
+    id: 5,
+    title: "Fitness Center Website",
+    description: "Modern fitness center showcase with service listings and contact forms.",
+    tech: ["HTML", "CSS", "JavaScript"],
+    image: "/images/project2.png",
+    liveUrl: "https://strengthgymphillaur.in",
+    githubUrl: "#"
+  },
+  {
+    id: 6,
+    title: "Industrial Corporate Site",
+    description: "Professional corporate website showcasing industrial services and capabilities.",
+    tech: ["WordPress", "PHP", "MySQL"],
+    image: "/images/project3.png",
+    liveUrl: "https://sutlejindustrialcorp.com",
+    githubUrl: "#"
+  },
+  {
+    id: 7,
+    title: "Tridenity - Startup Website",
+    description: "Modern startup landing page with services showcase and portfolio.",
+    tech: ["React", "Tailwind", "Framer Motion"],
+    image: "/images/project1.png",
+    liveUrl: "https://tridenity.com",
+    githubUrl: "#"
+  }
+];
+
+const ProjectCard = ({ project }) => {
+  return (
+    <div className={`group relative bg-neutral-900/50 backdrop-blur-sm border border-neutral-800/50 rounded-2xl overflow-hidden transition-all duration-500 hover:border-neutral-700 hover:bg-neutral-900/80 ${
+      project.featured 
+        ? 'md:col-span-2 lg:col-span-3 border-blue-500/50 bg-gradient-to-br from-blue-900/20 via-neutral-900/50 to-neutral-900/50' 
+        : ''
+    }`}>
+      {/* Featured Badge */}
+      {project.featured && (
+        <div className="absolute top-4 left-4 z-10">
+          <span className="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full">
+            ⭐ Featured Project
+          </span>
+        </div>
+      )}
+
+      {/* Project Image */}
+      <div className="relative overflow-hidden">
+        <img
+          src={project.image}
+          alt={project.title}
+          className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+            project.featured ? 'h-96 lg:h-[500px] object-contain bg-white/5' : 'h-48'
+          }`}
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        
+        {/* Overlay Links */}
+        <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors duration-200"
+          >
+            <ExternalLink className="w-4 h-4 text-white" />
+          </a>
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors duration-200"
+          >
+            <Github className="w-4 h-4 text-white" />
+          </a>
+        </div>
+      </div>
+
+      {/* Project Content */}
+      <div className={`space-y-4 ${project.featured ? 'p-8' : 'p-6'}`}>
+        <div className="space-y-2">
+          <h3 className={`font-semibold text-white group-hover:text-blue-400 transition-colors duration-300 ${
+            project.featured ? 'text-2xl' : 'text-lg'
+          }`}>
+            {project.title}
+          </h3>
+          <p className={`text-neutral-400 leading-relaxed ${
+            project.featured ? 'text-base' : 'text-sm'
+          }`}>
+            {project.description}
+          </p>
+        </div>
+
+        {/* Tech Stack */}
+        <div className="flex flex-wrap gap-2">
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className={`font-medium bg-blue-600/20 text-blue-300 rounded-full ${
+                project.featured ? 'px-4 py-2 text-sm' : 'px-2 py-1 text-xs'
+              }`}
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const AppShowcase = () => {
-  const sectionRefs = useRef([]);
-  const cardRefs = useRef([]);
-  const [expanded, setExpanded] = useState({});
-
-  const toggleReadMore = (index) => {
-    setExpanded((prev) => ({ ...prev, [index]: !prev[index] }));
-  };
-
-  useGSAP(() => {
-    sectionRefs.current.forEach((section) => {
-      gsap.fromTo(section, { opacity: 0 }, { opacity: 1, duration: 1.5 });
-    });
-
-    cardRefs.current.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { y: 50, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 1,
-          delay: 0.3 * (index + 1),
-          scrollTrigger: {
-            trigger: card,
-            start: "top bottom-=100",
-          },
-        }
-      );
-    });
-  }, []);
-
   return (
-    <>
-      {/* SECTION 1 */}
-      <div className="app-showcase" ref={(el) => (sectionRefs.current[0] = el)} id="work">
-        <div className="w-full showcaselayout">
-          {/* Project 0 */}
-          <div className="first-project-wrapper" ref={(el) => (cardRefs.current[0] = el)}>
-            <div className="image-wrapper">
-              <a href="https://hospital-management-system-lyart-eta.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <img className="max-w-full" src="/images/hospital.png" alt="Hospital Management System Interface" />
-              </a>
-            </div>
-            <div className="text-content">
-              <h2>Hospital Management System</h2>
-              <p className="text-white-50 md:text-xl">
-                A platform built to streamline hospital operations, including rating hospitals, listing facilities, and displaying specialties.
-              </p>
-              {expanded[0] && (
-                <div className="mt-3 text-sm text-gray-300">
-                  <p><strong>Functionality:</strong> Search hospitals, view details, rate, filter specialties, admin controls.</p>
-                  <p><strong>Tech Stack:</strong> React, Tailwind CSS, Node.js</p>
-                  <p><strong>Language:</strong> JavaScript</p>
-                  <p><strong>Database:</strong> MongoDB</p>
-                </div>
-              )}
-              <button onClick={() => toggleReadMore(0)} className="mt-2 text-blue-400 hover:underline">
-                {expanded[0] ? "Show Less" : "Read More"}
-              </button>
-            </div>
-          </div>
+    <section className="py-20 bg-black" id="work">
+      <div className="container mx-auto px-6">
+        {/* Section Header */}
+        <div className="text-center mb-16 space-y-4">
+          <h2 className="text-4xl md:text-6xl font-light text-white tracking-wide">
+            Featured <span className="font-semibold text-blue-400">Work</span>
+          </h2>
+          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+            A selection of projects showcasing modern web development and design principles.
+          </p>
+        </div>
 
-          <div className="project-list-wrapper overflow-hidden">
-            {/* Project 1 */}
-            <div className="project" ref={(el) => (cardRefs.current[1] = el)}>
-              <div className="image-wrapper bg-[#FFEFDB]">
-                <a href="https://strengthgymphillaur.in" target="_blank" rel="noopener noreferrer">
-                  <img className="max-w-full" src="/images/project2.png" alt="Strength Gym" />
-                </a>
-              </div>
-              <h2>Strength Gym Fitness Centre</h2>
-              {expanded[1] && (
-                <div className="mt-2 text-sm text-gray-300 px-2">
-                  <p><strong>Functionality:</strong> Showcase gym services, trainer info, contact form.</p>
-                  <p><strong>Tech Stack:</strong> HTML, CSS, JS, Bootstrap</p>
-                  <p><strong>Language:</strong> JavaScript</p>
-                  <p><strong>Database:</strong> None (Static Site)</p>
-                </div>
-              )}
-              <button onClick={() => toggleReadMore(1)} className="mt-2 text-blue-400 hover:underline">
-                {expanded[1] ? "Show Less" : "Read More"}
-              </button>
-            </div>
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
 
-            {/* Project 2 */}
-            <div className="project" ref={(el) => (cardRefs.current[2] = el)}>
-              <div className="image-wrapper bg-[#FFE7EB]">
-                <a href="https://sutlejindustrialcorp.com" target="_blank" rel="noopener noreferrer">
-                  <img className="max-w-full" src="/images/project3.png" alt="Hospital Specialties Showcase" />
-                </a>
-              </div>
-              <h2>Sutlej Industrial Corp</h2>
-              {expanded[2] && (
-                <div className="mt-2 text-sm text-gray-300 px-2">
-                  <p><strong>Functionality:</strong> Showcase product range, services, contact form.</p>
-                  <p><strong>Tech Stack:</strong> WordPress, Elementor</p>
-                  <p><strong>Language:</strong> PHP (WordPress)</p>
-                  <p><strong>Database:</strong> MySQL</p>
-                </div>
-              )}
-              <button onClick={() => toggleReadMore(2)} className="mt-2 text-blue-400 hover:underline">
-                {expanded[2] ? "Show Less" : "Read More"}
-              </button>
-            </div>
-          </div>
+        {/* View More Button */}
+        <div className="text-center mt-16">
+          <button className="px-8 py-3 border border-neutral-600 text-neutral-300 font-medium rounded-lg hover:border-neutral-500 hover:text-white transition-all duration-200">
+            View All Projects
+          </button>
         </div>
       </div>
-
-      {/* SECTION 2 */}
-      <div className="app-showcase" ref={(el) => (sectionRefs.current[1] = el)} id="projects">
-        <div className="w-full showcaselayout">
-          {/* Project 3 */}
-          <div className="first-project-wrapper" ref={(el) => (cardRefs.current[3] = el)}>
-            <div className="image-wrapper">
-              <a href="https://insurance-project-sepia.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <img className="max-w-full" src="/images/RAGG.png" alt="RAG App Interface" />
-              </a>
-            </div>
-            <div className="text-content">
-              <h2>AI-Powered PDF Summarizer & Q/A System</h2>
-              <p className="text-white-50 md:text-xl">
-                Built with TypeScript, OpenAI, Milvus, PostgreSQL for precise, context-aware answers.
-              </p>
-              {expanded[3] && (
-                <div className="mt-3 text-sm text-gray-300">
-                  <p><strong>Functionality:</strong> Upload PDFs, get summaries, ask questions with AI-generated answers.</p>
-                  <p><strong>Tech Stack:</strong> Next.js, TypeScript, OpenAI API, Milvus, Tailwind</p>
-                  <p><strong>Language:</strong> TypeScript</p>
-                  <p><strong>Database:</strong> PostgreSQL, Milvus (vector DB)</p>
-                </div>
-              )}
-              <button onClick={() => toggleReadMore(3)} className="mt-2 text-blue-400 hover:underline">
-                {expanded[3] ? "Show Less" : "Read More"}
-              </button>
-            </div>
-          </div>
-
-          <div className="project-list-wrapper overflow-hidden">
-            {/* Project 4 */}
-            <div className="project" ref={(el) => (cardRefs.current[4] = el)}>
-              <div className="image-wrapper bg-[#FFEFDB]">
-                <a href="https://tridenity.com" target="_blank" rel="noopener noreferrer">
-                  <img className="max-w-full" src="/images/project1.png" alt="Startup Web Agency" />
-                </a>
-              </div>
-              <h2>My Startup Website - Tridenity</h2>
-              {expanded[4] && (
-                <div className="mt-2 text-sm text-gray-300 px-2">
-                  <p><strong>Functionality:</strong> Landing page, services showcase, project portfolio, contact.</p>
-                  <p><strong>Tech Stack:</strong> React, Tailwind, Framer Motion</p>
-                  <p><strong>Language:</strong> JavaScript</p>
-                  <p><strong>Database:</strong> None (Static)</p>
-                </div>
-              )}
-              <button onClick={() => toggleReadMore(4)} className="mt-2 text-blue-400 hover:underline">
-                {expanded[4] ? "Show Less" : "Read More"}
-              </button>
-            </div>
-
-            {/* Project 5 */}
-            <div className="project" ref={(el) => (cardRefs.current[5] = el)}>
-              <div className="image-wrapper bg-[#FFE7EB]">
-                <a href="https://sih-project-two.vercel.app/" target="_blank" rel="noopener noreferrer">
-                  <img className="max-w-full" src="/images/agribid.png" alt="Agribid Marketplace App" />
-                </a>
-              </div>
-              <h2>Agribid - A Marketplace for Farmers</h2>
-              {expanded[5] && (
-                <div className="mt-2 text-sm text-gray-300 px-2">
-                  <p><strong>Functionality:</strong> Farmer and buyer login, product listing, real-time bidding, chat.</p>
-                  <p><strong>Tech Stack:</strong> React, Node.js, Tailwind CSS, Socket.IO</p>
-                  <p><strong>Language:</strong> JavaScript</p>
-                  <p><strong>Database:</strong> MongoDB</p>
-                </div>
-              )}
-              <button onClick={() => toggleReadMore(5)} className="mt-2 text-blue-400 hover:underline">
-                {expanded[5] ? "Show Less" : "Read More"}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+    </section>
   );
 };
 
